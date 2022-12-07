@@ -13,10 +13,15 @@
 
 
 - 同步问题
+  - 直接调用resolve
 - 异步问题
+  - 定时器调用resolve
 - 微任务队列问题
+  - 采用queueMicrotask()
 - 重复调用问题
+  - 将callbacks变量设定为一个数组，否则后面的then传递的回调函数会将前面的回调函数覆盖
 - 链式调用问题
+  - then返回一个新的promise 实例对象
 
 ```
 const PROMISE_STATE = {
