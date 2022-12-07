@@ -58,6 +58,8 @@ promise
   })
   // 所以 promise.then又造成链式调用地狱的问题， 用async await 解决
 ```
+# Promise 的实例方法
+then catch finally
 
 # Promise 的静态方法
 直接通过Promise类调用
