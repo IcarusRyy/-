@@ -380,22 +380,26 @@ var postorderTraversal = function (root) {
   return arr
 }
 
-// 栈
+// 栈  使用 根 右 左 将遍历的结果以相反的顺序添加到结果数组中（通过在数组前端插入节点值），最终得到了“左 -> 右 -> 根”的后序遍历顺序
 var postorderTraversal = function (root) {
+  if (!root) return []
   const arr = []
-  const stack = []
-  let o = root
-  while (stack.length || o) {
-    while (o) {
-      stack.push(o)
-      o = o.left
+  const stack = [root]
+  while (stack.length) {
+    const item = stack.pop()
+    // 从前面推入数组
+    arr.unshift(item.val)
+    // 先将左边 压栈 会后执行
+    if (item.left) {
+      stack.push(item.left)
     }
-    const n = stack.pop()
-    arr.push(n.val)
-    o = n.right
+    // 再将右边压栈 会先执行
+    if (item.right) {
+      stack.push(item.right)
+    }
   }
   return arr
 }
 
-console.log(postorderTraversal(tree)) // 打印结果 ['4', '2', '5', '1', '6', '3', '7']
+console.log(postorderTraversal(tree)) // 打印结果 ['4', '5', '2', '6', '7', '3', '1']
 ```
