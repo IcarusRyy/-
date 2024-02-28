@@ -155,8 +155,105 @@ const fun2 = (root) => {
 fun2(tree) // a b c d e f g
 ```
 
+# 多叉树
+
+DOM 结构就是多叉树
+
+一个节点下有 2 个以上的分叉
+
 # 二叉树
 
-# 二叉树的前序遍历
+```js
+const tree = {
+  val: "1",
+  left:{
+    val:'2',
+    left:{
+      val:'4',
+      left:null,
+      right:null
+    },
+    right:{
+      val:'4'
+      left:null,
+      right:null
+    },
+  },
+  right:{
+    val:'3',
+    left:{
+      val:'6',
+      left:null,
+      right:null
+    },
+    right:{
+      val:'7'
+      left:null,
+      right:null
+    },
+  }
+}
+
+```
+
+# 二叉树的前序遍历 或者叫 二叉树的先序遍历
+
+口诀：
+根
+左
+右
+
+```js
+const tree = {
+  val: "1",
+  left: {
+    val: "2",
+    left: {
+      val: "4",
+      left: null,
+      right: null,
+    },
+    right: {
+      val: "5",
+      left: null,
+      right: null,
+    },
+  },
+  right: {
+    val: "3",
+    left: {
+      val: "6",
+      left: null,
+      right: null,
+    },
+    right: {
+      val: "7",
+      left: null,
+      right: null,
+    },
+  },
+}
+
+var preorderTraversal = function (root) {
+  let res = []
+
+  const fun = (node) => {
+    if (node) {
+      // 先根节点
+      res.push(node.val)
+
+      // 遍历左子树
+      fun(node.left)
+      // 遍历右子树
+      fun(node.right)
+    }
+  }
+  fun(root)
+
+  return res
+}
+
+console.log(preorderTraversal(tree)) // 打印结果 ["1", "2", "4", "5", "3", "6", "7"]
+```
 
 # 二叉树的后序遍历
