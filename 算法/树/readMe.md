@@ -309,7 +309,93 @@ var inorderTraversal = function (root) {
   return arr
 }
 
-console.log(inorderTraversal(tree)) // 打印结果 ["1", "2", "4", "5", "3", "6", "7"]
+// 栈
+var inorderTraversal = function (root) {
+  const arr = []
+  const stack = []
+  let o = root
+  while (stack.length || o) {
+    while (o) {
+      stack.push(o)
+      o = o.left
+    }
+    const n = stack.pop()
+    arr.push(n.val)
+    o = n.right
+  }
+  return arr
+}
+
+console.log(inorderTraversal(tree)) // 打印结果 ['4', '2', '5', '1', '6', '3', '7']
 ```
 
 # 二叉树的后序遍历
+
+左
+右
+根
+
+```js
+const tree = {
+  val: "1",
+  left: {
+    val: "2",
+    left: {
+      val: "4",
+      left: null,
+      right: null,
+    },
+    right: {
+      val: "5",
+      left: null,
+      right: null,
+    },
+  },
+  right: {
+    val: "3",
+    left: {
+      val: "6",
+      left: null,
+      right: null,
+    },
+    right: {
+      val: "7",
+      left: null,
+      right: null,
+    },
+  },
+}
+// 递归版
+var postorderTraversal = function (root) {
+  const arr = []
+  const fun = (root) => {
+    if (!root) return
+
+    // 找左子树
+    fun(root.left)
+    fun(root.right)
+    arr.push(root.val)
+  }
+  fun(root)
+  return arr
+}
+
+// 栈
+var postorderTraversal = function (root) {
+  const arr = []
+  const stack = []
+  let o = root
+  while (stack.length || o) {
+    while (o) {
+      stack.push(o)
+      o = o.left
+    }
+    const n = stack.pop()
+    arr.push(n.val)
+    o = n.right
+  }
+  return arr
+}
+
+console.log(postorderTraversal(tree)) // 打印结果 ['4', '2', '5', '1', '6', '3', '7']
+```
