@@ -256,4 +256,60 @@ var preorderTraversal = function (root) {
 console.log(preorderTraversal(tree)) // 打印结果 ["1", "2", "4", "5", "3", "6", "7"]
 ```
 
+# 二叉树的中序遍历
+
+左
+根
+右
+
+![Alt text](image-1.png)
+
+```js
+const tree = {
+  val: "1",
+  left: {
+    val: "2",
+    left: {
+      val: "4",
+      left: null,
+      right: null,
+    },
+    right: {
+      val: "5",
+      left: null,
+      right: null,
+    },
+  },
+  right: {
+    val: "3",
+    left: {
+      val: "6",
+      left: null,
+      right: null,
+    },
+    right: {
+      val: "7",
+      left: null,
+      right: null,
+    },
+  },
+}
+// 递归版
+var inorderTraversal = function (root) {
+  const arr = []
+  const fun = (root) => {
+    if (!root) return
+
+    // 找左子树
+    fun(root.left)
+    arr.push(root.val)
+    fun(root.right)
+  }
+  fun(root)
+  return arr
+}
+
+console.log(inorderTraversal(tree)) // 打印结果 ["1", "2", "4", "5", "3", "6", "7"]
+```
+
 # 二叉树的后序遍历
