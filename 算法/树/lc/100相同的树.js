@@ -18,3 +18,18 @@ var isSameTree = function (p, q) {
   if (p.val !== q.val) return false
   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
 }
+
+// 栈 深度优先遍历 DFS
+var isSameTree = function (p, q) {
+  const stack = [[p, q]]
+  while (stack.length) {
+    const [t1, t2] = stack.pop()
+
+    if (t1 === null && t2 === null) continue
+    if (t1 === null || t2 === null || t1.val !== t2.val) return false
+
+    stack.push([t1.left, t2.left])
+    stack.push([t1.right, t2.right])
+  }
+  return true
+}
