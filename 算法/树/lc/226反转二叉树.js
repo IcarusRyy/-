@@ -39,3 +39,21 @@ var invertTree = function (root) {
   }
   return root
 }
+
+// 队列 广度优先遍历 BFS
+
+var invertTree = function (root) {
+  if (!root) return null
+
+  const queue = [root]
+  while (queue.length) {
+    // 队列 从头取
+    const item = queue.shift()
+    const tmp = item.left
+    item.left = item.right
+    item.right = tmp
+    item.left && queue.push(item.left)
+    item.right && queue.push(item.right)
+  }
+  return root
+}
