@@ -27,3 +27,21 @@ var maxDepth = function (root) {
   }
   return max
 }
+
+// 队列 广度优先遍历 BFS
+var maxDepth = function (root) {
+  if (!root) return 0
+
+  const queue = [[root, 1]]
+  let currentDepth = 0
+
+  while (queue.length) {
+    const [o, n] = queue.shift()
+    if (o) {
+      queue.push([o.left, n + 1]) // 左节点 入队
+      queue.push([o.right, n + 1]) // 右节点 入队
+      currentDepth = n // 当前层级
+    }
+  }
+  return currentDepth
+}
