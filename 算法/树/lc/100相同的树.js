@@ -33,3 +33,18 @@ var isSameTree = function (p, q) {
   }
   return true
 }
+
+// 队列 广度优先遍历 BFS
+var isSameTree = function (p, q) {
+  const queue = [[p, q]]
+  while (queue.length) {
+    const [t1, t2] = queue.shift()
+
+    if (t1 === null && t2 === null) continue
+    if (t1 === null || t2 === null || t1.val !== t2.val) return false
+
+    queue.push([t1.left, t2.left])
+    queue.push([t1.right, t2.right])
+  }
+  return true
+}
