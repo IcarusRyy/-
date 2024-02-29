@@ -1,5 +1,3 @@
-;[5, 2, 3, 6, 8, 9, 1, 2]
-
 class MinHeap {
   constructor() {
     this.heap = []
@@ -42,7 +40,7 @@ class MinHeap {
   // 下移操作 往后移
   down(index) {
     const leftIndex = this.getLeftIndex(index)
-    const rightIndex = -this.getRightIndex(index)
+    const rightIndex = this.getRightIndex(index)
     if (this.heap[leftIndex] < this.heap[index]) {
       this.swap(leftIndex, index)
       this.down(leftIndex)
