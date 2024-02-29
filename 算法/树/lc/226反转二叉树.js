@@ -10,6 +10,8 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
+
+// 递归
 var invertTree = function (root) {
   if (!root) return null
 
@@ -19,4 +21,21 @@ var invertTree = function (root) {
 
   invertTree(root.right)
   invertTree(root.left)
+}
+
+// 栈  深度优先遍历 DFS
+var invertTree = function (root) {
+  if (!root) return null
+
+  const stack = [root]
+
+  while (stack.length) {
+    const item = stack.pop()
+    const tmp = item.left
+    item.left = item.right
+    item.right = tmp
+    item.left && stack.push(item.left)
+    item.right && stack.push(item.right)
+  }
+  return root
 }
