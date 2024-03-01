@@ -1,3 +1,5 @@
+// 降序使用小顶堆
+
 class MinHeap {
   constructor() {
     this.heap = []
