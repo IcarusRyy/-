@@ -43,13 +43,21 @@ class MinHeap {
   down(index) {
     const leftIndex = this.getLeftIndex(index)
     const rightIndex = this.getRightIndex(index)
-    if (this.heap[leftIndex] < this.heap[index]) {
-      this.swap(leftIndex, index)
-      this.down(leftIndex)
+
+    let smallest = index
+
+    if (leftIndex < this.size() && this.heap[leftIndex] < this.heap[smallest]) {
+      smallest = leftIndex
     }
-    if (this.heap[rightIndex] < this.heap[index]) {
-      this.swap(rightIndex, index)
-      this.down(rightIndex)
+    if (
+      rightIndex < this.size() &&
+      this.heap[rightIndex] < this.heap[smallest]
+    ) {
+      smallest = rightIndex
+    }
+    if (smallest !== index) {
+      this.swap(smallest, index)
+      this.down(smallest)
     }
   }
 
@@ -60,8 +68,16 @@ class MinHeap {
   }
   // 删除堆顶
   pop() {
+    if (this.size() === 0) {
+      return // 或者抛出错误
+    }
+    if (this.size() === 1) {
+      return this.heap.pop()
+    }
+    const top = this.heap[0]
     this.heap[0] = this.heap.pop()
     this.down(0)
+    return top // 返回被删除的堆顶元素
   }
   // 获取堆顶
   peek() {
