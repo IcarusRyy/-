@@ -32,6 +32,7 @@ class MaxHeap {
 
   // 位置上移操作（往前移动）
   up(index) {
+    // 获取父节点的下标
     let parentIndex = this.getParentIndex(index)
     while (index > 0 && this.heap[parentIndex] < this.heap[index]) {
       this.swap(parentIndex, index)
@@ -64,6 +65,7 @@ class MaxHeap {
   // 添加元素
   insert(value) {
     this.heap.push(value)
+    // this.heap.length - 1 就是当前添加元素的下标
     this.up(this.heap.length - 1)
   }
 
@@ -91,3 +93,11 @@ class MaxHeap {
     return this.heap.length
   }
 }
+
+let arr = new MaxHeap()
+arr.insert(5)
+arr.insert(4)
+arr.insert(1)
+arr.insert(2)
+// arr.pop()
+console.log(arr.heap)
