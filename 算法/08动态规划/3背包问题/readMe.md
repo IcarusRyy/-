@@ -39,6 +39,10 @@ const res = package(6, [5, 10, 3, 6, 3], [2, 5, 1, 4, 3])
 console.log(res, "res") // 13
 ```
 
+求装满背包有几种方法的情况下，递推公式一般为：dp[j] = dp[j] + dp[j-nums[i]]。
+
+![Alt text](image-1.png)
+
 # 完全背包
 
 例子： 有 n 种物品，每种物品有无限个
