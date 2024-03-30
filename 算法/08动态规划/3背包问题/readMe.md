@@ -43,6 +43,11 @@ console.log(res, "res") // 13
 
 ![Alt text](image-1.png)
 
+471 题 1 和 0 递推公式意义
+dp[i][j] = max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);
++1 是指 增加了一个字符串，代表采用当前字符串之后，所有的子集数量 需要增加一个，增加的这一个就是当前所采用的这个，因为 dp[i - zeroNum][j - oneNum]代表没采用之前所有的子集数量，所以 +1
+![alt text](image-2.png)
+
 # 完全背包
 
 例子： 有 n 种物品，每种物品有无限个
