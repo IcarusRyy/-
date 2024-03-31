@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Performance Measurement Example</title>
+</head>
+
+<body>
+  <h1>Hello, World!</h1>
+  <img src="https://via.placeholder.com/400x200" alt="Sample Image" onload="imageLoaded()">
+  <script>
+    // 记录首屏时间
+    function imageLoaded() {
+      console.log('Image loaded, simulating First Contentful Paint');
+    }
+
+    // 性能监测
+    window.onload = function () {
+      const [firstPaintEntry] = performance.getEntriesByName('first-paint');
+      const [firstContentfulPaintEntry] = performance.getEntriesByName('first-contentful-paint');
+
+      if (firstPaintEntry) {
+        console.log('First Paint Time:', firstPaintEntry.startTime);
+      }
+
+      if (firstContentfulPaintEntry) {
+        console.log('First Contentful Paint Time:', firstContentfulPaintEntry.startTime);
+      }
+    };
+  </script>
+</body>
+
+</html>
