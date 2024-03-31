@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lazy Load Images Demo</title>
+  <style>
+    /* 设置图片高度，模拟长页面 */
+    img {
+      width: 100%;
+      height: 300px;
+      margin-top: 20px;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 模拟的图片列表 -->
+  <img data-src="https://via.placeholder.com/1000x300?text=Image+1" alt="Image 1">
+  <img data-src="https://via.placeholder.com/1000x300?text=Image+2" alt="Image 2">
+  <img data-src="https://via.placeholder.com/1000x300?text=Image+3" alt="Image 3">
+  <img data-src="https://via.placeholder.com/1000x300?text=Image+4" alt="Image 4">
+  <img data-src="https://via.placeholder.com/1000x300?text=Image+5" alt="Image 5">
+
+  <script>
+    // 懒加载函数
+    function lazyLoad() {
+      let images = document.querySelectorAll('img[data-src]');
+      console.log(images, 'images')
+      images.forEach(img => {
+        console.log(img.dataset, 'dataset')
+        if (img.getBoundingClientRect().top < document.documentElement.clientHeight) {
+          img.src = img.dataset.src;
+          img.onload = () => img.removeAttribute('data-src');
+        }
+      });
+
+      // 移除已加载的图片的监听
+      images = document.querySelectorAll('img[data-src]');
+      if (images.length === 0) {
+        // 如果所有的图片都加载完毕，移除滚动事件监听
+        window.removeEventListener('scroll', lazyLoad);
+      }
+    }
+
+    // 为滚动事件添加监听，以及初始加载
+    window.addEventListener('scroll', lazyLoad);
+    window.addEventListener('load', lazyLoad);
+  </script>
+
+</body>
+
+</html>

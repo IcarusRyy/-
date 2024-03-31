@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Intersection Observer Lazy Load Example</title>
+  <style>
+    img {
+      width: 100%;
+      height: 300px;
+      margin-top: 20px;
+      background-color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 模拟的图片列表 -->
+  <img class="lazy" data-src="https://via.placeholder.com/1000x300?text=Image+1" alt="Image 1">
+  <img class="lazy" data-src="https://via.placeholder.com/1000x300?text=Image+2" alt="Image 2">
+  <img class="lazy" data-src="https://via.placeholder.com/1000x300?text=Image+3" alt="Image 3">
+  <img class="lazy" data-src="https://via.placeholder.com/1000x300?text=Image+4" alt="Image 4">
+  <img class="lazy" data-src="https://via.placeholder.com/1000x300?text=Image+5" alt="Image 5">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const images = document.querySelectorAll('.lazy');
+      const config = {
+        rootMargin: '0px',
+        threshold: 0.01
+      };
+
+      let observer = new IntersectionObserver(function (entries, self) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.getAttribute('data-src');
+            if (src) {
+              img.setAttribute('src', src);
+              img.onload = () => img.removeAttribute('data-src');
+            }
+            self.unobserve(entry.target);
+          }
+        });
+      }, config);
+
+      images.forEach(image => {
+        observer.observe(image);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
