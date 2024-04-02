@@ -55,3 +55,5 @@ dp[i][j] = max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);
 如果求组合数就是外层 for 循环遍历物品，内层 for 遍历背包。
 
 如果求排列数就是外层 for 遍历背包，内层 for 循环遍历物品。
+
+![Alt text](image-3.png)
