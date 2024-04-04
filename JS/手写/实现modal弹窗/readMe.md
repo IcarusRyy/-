@@ -1,5 +1,6 @@
 # 使用 createPortal 创建 Modal 弹窗
 
+createPortal 允许你将 JSX 作为 children 渲染至 DOM 的不同部分。
 使用 ReactDOM.createPortal(component, document.body)
 
 ```jsx
