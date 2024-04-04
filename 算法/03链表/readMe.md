@@ -107,3 +107,19 @@ function customInstanceof(left, right) {
   return false
 }
 ```
+
+# 单链表
+
+虚拟头节点
+
+# 双链表
+
+![Alt text](image-4.png)
+
+# 循环链表
+
+![Alt text](image-5.png)
+
+# 性能分析
+
+![Alt text](image-6.png)
