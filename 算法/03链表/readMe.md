@@ -110,7 +110,7 @@ function customInstanceof(left, right) {
 
 # 单链表
 
-虚拟头节点
+虚拟头节点： 常常用于插入和删除的操作
 
 # 双链表
 
