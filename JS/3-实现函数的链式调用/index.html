@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function add(val) {
+      return val + 1
+    }
+
+    function double(val) {
+      return val * 2
+    }
+
+    function decrease(val) {
+      return val - 1
+    }
+
+    function chain(val) {
+      const handler = {
+        get: function (obj, key) {
+          console.log(obj, key)
+          if (key === 'end') {
+            return obj.val
+          }
+
+          if (typeof window[key] === 'function') {
+            obj.val = window[key](obj.val)
+            return proxy
+          }
+          return obj[key]
+        }
+      }
+      const proxy = new Proxy({
+        val
+      }, handler)
+      return proxy
+    }
+    console.log(chain(3).add.double.decrease.end, '链式调用chain')
+  </script>
+</body>
+
+</html>
