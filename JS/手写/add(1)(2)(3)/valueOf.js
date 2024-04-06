@@ -11,4 +11,6 @@ function add(...args) {
   return sumFunc
 }
 
-console.log(add(1, 2, 3, 4, 5)(5).valueOf())
+console.log(add(1, 2, 3, 4, 5)(5) + 2)
+console.log(add(2, 3)(2).valueOf())
+console.log(add(2)(4, 1)(2).valueOf())
