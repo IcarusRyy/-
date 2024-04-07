@@ -15,6 +15,7 @@
 var maxDepth = function (root) {
   if (!root) return 0
 
+  // 后序遍历
   const getHeight = function (node) {
     if (!node) return 0
     let leftHeight = getHeight(node.left)
