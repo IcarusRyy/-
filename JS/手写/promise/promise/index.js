@@ -9,6 +9,13 @@ class MyPromise {
   #state = PROMISE_STATE.PENDING // 初始状态为pending
 
   #handler = [] // 保存回调函数
+
+  #changeState(state, result) {
+    if (this.#state !== PROMISE_STATE.PENDING) return
+    this.#state = state
+    this.#result = result
+    this.#run()
+  }
   constructor(executor) {
     const resolve = (data) => {
       this.#changeState(PROMISE_STATE.FULFILLED, data)
@@ -16,6 +23,7 @@ class MyPromise {
     const reject = (reason) => {
       this.#changeState(PROMISE_STATE.REJECTED, reason)
     }
+    // 只能捕获同步错误，异步错误比如定时器之类的，是捕获不到的
     try {
       executor(resolve, reject)
     } catch (err) {
@@ -78,12 +86,7 @@ class MyPromise {
       }
     }
   }
-  #changeState(state, result) {
-    if (this.#state !== PROMISE_STATE.PENDING) return
-    this.#state = state
-    this.#result = result
-    this.#run()
-  }
+
   // then 传入的两个回调 什么时候运行
   // then 方法返回一个promise 这个promise 什么时候完成 什么时候失败
   then(onFulfilled, onRejected) {
