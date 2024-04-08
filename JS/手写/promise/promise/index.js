@@ -102,12 +102,15 @@ class MyPromise {
   }
 }
 
-// const p = new MyPromise((resolve, reject) => {
-//   setTimeout(() => {
-//     // resolve("成功")
-//     reject("失败")
-//   }, 1000)
-// })
+const p = new MyPromise((resolve, reject) => {
+  resolve(123)
+  // reject(123)
+  // setTimeout(() => {
+  //   resolve("成功")
+  //   // reject("失败")
+  // }, 1000)
+})
+console.log(p)
 // p.then(null, (err) => {
 //   console.log("失败完成1", err)
 //   return 456
@@ -120,12 +123,12 @@ class MyPromise {
 //   }
 // )
 
-setTimeout(() => {
-  console.log(1)
-}, 0)
+// setTimeout(() => {
+//   console.log(1)
+// }, 0)
 
-new MyPromise((resolve) => {
-  resolve(2)
-}).then((data) => console.log(data))
+// new MyPromise((resolve) => {
+//   resolve(2)
+// }).then((data) => console.log(data))
 
-console.log(3)
+// console.log(3)
