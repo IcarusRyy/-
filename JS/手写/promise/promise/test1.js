@@ -108,7 +108,7 @@ class MyPromise {
         // if (typeof onRejected !== "function") {
         //   try {
         //     const res = onRejected(this.#result)
-        //     reject(res)
+        //     resolve(res);
         //   } catch (err) {
         //     reject(err)
         //   }
