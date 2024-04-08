@@ -1,15 +1,16 @@
 import React, { useRef, useCallback } from "react"
 
-const useThrottle = (fn, delay = 300) => {
+export const useThrottle = (fn, delay = 300) => {
   const timer = useRef()
 
   return useCallback(() => {
     if (timer.current) {
-      clearTimeout(timer.current)
+      return
     }
-    timer.current = setTimeout(() => {
+    timer.current = true
+    setTimeout(() => {
       fn()
-      time1.current = null
+      time1.current = false
     }, delay)
   }, [delay])
 }
