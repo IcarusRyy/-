@@ -1,29 +1,29 @@
-Promise.myAllSettled = function (proms) {
+Promise.myAllsettled = function (proms) {
   return new Promise((resolve, reject) => {
     let count = 0
-    let result = []
+    let reulst = []
 
     proms.forEach((item, index) => {
       Promise.resolve(item)
         .then(
-          (res) => {
-            result[index] = res
+          (data) => {
+            reulst[index] = data
           },
           (rea) => {
-            result[index] = rea
+            reulst[index] = rea
           }
         )
         .finally(() => {
           count++
           if (count === proms.length) {
-            resolve(result)
+            resolve(reulst)
           }
         })
     })
   })
 }
 
-Promise.myAllSettled([1, 2, Promise.reject(3)]).then(
+Promise.myAllsettled([1, 2, Promise.reject(3)]).then(
   (res) => {
     console.log("成功", res)
   },
