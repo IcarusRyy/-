@@ -1,5 +1,5 @@
 const useLocalStorage = (key, initVal) => {
-  let storedValue = localStorage.getItem("val")
+  let storedValue = localStorage.getItem("key")
 
   let initData = storedValue ? JSON.parse(storedValue) : initVal
 

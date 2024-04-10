@@ -1,4 +1,4 @@
-function deepEquil(a, b) {
+function deepEqual(a, b) {
   if (a === b) return true
 
   if (a === null || b === null) return a === b
@@ -13,7 +13,7 @@ function deepEquil(a, b) {
     // 递归比较每个键
     for (let key of akeys) {
       if (!bkeys.includes(key)) return false
-      if (!deepEquil(a[key], b[key])) return false
+      if (!deepEqual(a[key], b[key])) return false
     }
   }
 
