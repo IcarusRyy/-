@@ -31,7 +31,7 @@ Promise.myAll = function (proms) {
   return p
 }
 
-Promise.myAll([1, 23, Promise.resolve(999)]).then(
+Promise.myAll([1, 23, Promise.reject(999)]).then(
   (res) => console.log(res),
   (err) => console.log("err", err)
 )
