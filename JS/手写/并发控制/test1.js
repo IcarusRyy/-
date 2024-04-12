@@ -37,10 +37,8 @@ function pLimit(max) {
   const enqueue = (fn, resolve) => {
     // 创建任务
     const task = run.bind(null, fn, resolve)
-    queue.push(task)
-    ;// 检查当前队列是否还有任务 并且 当前正在执行的任务 是否小于 并发数
-    (async () => {
-      // 延时等待
+    queue.push(task) // 检查当前队列是否还有任务 并且 当前正在执行的任务 是否小于 并发数
+    ;(async () => {
       await Promise.resolve()
 
       if (activeCount < max && queue.length > 0) {
