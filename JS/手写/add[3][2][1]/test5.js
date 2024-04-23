@@ -6,23 +6,11 @@ function createProxy(val = 0) {
         if (key === Symbol.toPrimitive) {
           return () => val
         }
-        return createProxy(val + Number(key))
+        return createProxy(Number(key) + val)
       },
     }
   )
 }
-
 const add = createProxy()
 
-console.log(add[1][2][3])
-
-// var a = 2
-// let c = 4
-// function test() {
-//   a = 3
-//   let d = 5
-//   console.log(d)
-//   console.log(c)
-//   return a
-// }
-// console.log(test())
+console.log(add[1])
