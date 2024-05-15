@@ -2,7 +2,7 @@ function createProxy(val = 0) {
   return new Proxy(
     {},
     {
-      get: function (target, key) {
+      get(target, key) {
         if (key === Symbol.toPrimitive) {
           return () => val
         }
@@ -13,16 +13,4 @@ function createProxy(val = 0) {
 }
 
 const add = createProxy()
-
 console.log(add[1][2][3] + 2)
-
-// var a = 2
-// let c = 4
-// function test() {
-//   a = 3
-//   let d = 5
-//   console.log(d)
-//   console.log(c)
-//   return a
-// }
-// console.log(test())

@@ -106,7 +106,7 @@ const p = new MyPromise((resolve, reject) => {
 p.then(
   (data) => {
     console.log("成功完成，", data)
-    return 456
+    return data
   },
   (err) => {
     console.log("失败完成", err)
