@@ -1,27 +1,25 @@
-Promise.myAll = function (proms) {
+Promise.myAll = function (arr) {
   let res, rej
-
-  const p = new Promise((resolve, reject) => {
+  let p = new Promise((resolve, reject) => {
     res = resolve
     rej = reject
   })
 
-  let i = 0
   let result = []
+  let i = 0
   let fulfilledCount = 0
-  for (let item of proms) {
-    const index = i
-    i++
 
+  for (let item of arr) {
+    let index = i
+    i++
     Promise.resolve(item).then((data) => {
-      fulfilledCount++
       result[index] = data
-      if (fulfilledCount === proms.length) {
+      fulfilledCount++
+      if (fulfilledCount === arr.length) {
         res(result)
       }
     }, rej)
   }
-
   return p
 }
 

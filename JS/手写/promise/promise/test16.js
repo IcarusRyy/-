@@ -6,50 +6,47 @@ const PROMISE_STATE = {
 
 class MyPromise {
   #state = PROMISE_STATE.PENDING
-  #result
+  #result = null
   #handler = []
   constructor(executor) {
     let resolve = (data) => this.#changeState(data, PROMISE_STATE.FULFILLED)
-    let reject = (rea) => this.#changeState(data, PROMISE_STATE.REJECTED)
+    let reject = (rea) => this.#changeState(rea, PROMISE_STATE.REJECTED)
     try {
-      executor(resolve)
+      executor(resolve, reject)
     } catch (err) {
       reject(err)
     }
   }
+
   #changeState(data, state) {
     this.#state = state
     this.#result = data
+    this.#run()
   }
-
   #isPromise(val) {
-    if (val && (typeof val === "object" || typeof val === "function")) {
+    if (val && (typeof val === "function" || typeof val === "object")) {
       return typeof val.then === "function"
     } else {
       return false
     }
   }
-  #runMicroTask(fn) {
+  #runMicro(fn) {
     queueMicrotask(fn)
   }
 
   #runOne(callback, resolve, reject) {
-    this.#runMicroTask(() => {
+    this.#runMicro(() => {
       if (typeof callback !== "function") {
         const settled =
           this.#state === PROMISE_STATE.FULFILLED ? resolve : reject
         settled(this.#result)
         return
       } else {
-        try {
-          const res = callback(this.#result)
-          if (this.#isPromise(res)) {
-            res.then(resolve, reject)
-          } else {
-            resolve(res)
-          }
-        } catch (rea) {
-          reject(rea)
+        const res = callback(this.#result)
+        if (this.#isPromise(res)) {
+          res.then(resolve, reject)
+        } else {
+          resolve(res)
         }
       }
     })
@@ -57,36 +54,32 @@ class MyPromise {
 
   #run() {
     if (this.#state === PROMISE_STATE.PENDING) return
-    const { onFulfilled, onRejected, resolve, reject } = this.#handler.shift()
-    if (this.#state === PROMISE_STATE.FULFILLED) {
-      this.#runOne(onFulfilled, resolve, reject)
-    } else {
-      this.#runOne(onRejected, resolve, reject)
+    while (this.#handler.length) {
+      const { onFulfilled, onRejected, resolve, reject } = this.#handler.shift()
+      if (this.#state === PROMISE_STATE.FULFILLED) {
+        this.#runOne(onFulfilled, resolve, reject)
+      } else {
+        this.#runOne(onRejected, resolve, reject)
+      }
     }
   }
 
   then(onFulfilled, onRejected) {
     return new MyPromise((resolve, reject) => {
-      this.#handler.push({
-        onFulfilled,
-        onRejected,
-        resolve,
-        reject,
-      })
+      this.#handler.push({ onFulfilled, onRejected, resolve, reject })
       this.#run()
     })
   }
 }
 
-const p = new Promise((resolve, reject) => {
-  // resolve(123)
-  reject(456)
+const p = new MyPromise((resolve) => {
+  resolve(123)
 })
 
 p.then(
-  (data) => console.log("成功", data),
-  (rea) => console.log("失败", rea)
-).then(
   (data) => console.log(data, "then2"),
+  (rea) => console.log(rea, "rea")
+).then(
+  (data) => console.log(data, "then1"),
   (rea) => console.log(rea, "then2")
 )

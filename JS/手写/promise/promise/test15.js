@@ -81,7 +81,7 @@ const p = new Promise((resolve) => resolve(123))
 
 p.then((data) => {
   console.log(data, "then1")
-  return data
+  // return data
 }).then((data) => console.log(data, "then2"))
 
 MyPromise.myAll = function (arr) {
