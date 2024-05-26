@@ -10,3 +10,17 @@ function getIntersection(...args) {
   }
   return [start, end]
 }
+
+function underlineToHump(obj) {
+  let res = {}
+  let keys = Object.keys(obj)
+  for (let key of keys) {
+    const newKey = key.replace()
+    if (typeof obj[key] === "object") {
+      res[newKey] = underlineToHump(obj[key])
+    } else {
+      res[newKey] = obj[key]
+    }
+  }
+  return res
+}
